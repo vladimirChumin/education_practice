@@ -20,7 +20,7 @@ def create_random_matrix_from_file():
     matrix = RandomMatrix(rows, cols)
     return matrix
 
-def process_and_multiply_matrices():
+def process_and_add_matrices():
     A = create_random_matrix_from_file()
     B = RandomMatrix(A.rows, A.cols)
     print(f"Matrix A:\n{A}")
