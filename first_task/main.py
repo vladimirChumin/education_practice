@@ -13,7 +13,7 @@ def create_diagonal_matrix():
     print(f"Diagonal Matrix of size {size}:\n{chessboard}")
 
 def create_random_matrix_from_file():
-    with open("input_1.txt", 'r') as f:
+    with open("input.txt", 'r') as f:
         line = f.readline()
     rows, cols = map(int, line.split())
     matrix = RandomMatrix(rows, cols)
