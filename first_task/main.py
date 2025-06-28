@@ -1,6 +1,6 @@
 import numpy as np
 import random as rd
-from base_classes.Matrix import Matrix, RandomMatrix, Chessboard
+from Matrix import Matrix, RandomMatrix, Chessboard
 
 def read_np():
     line = input("Enter a line of numbers separated by spaces: \n")
@@ -14,7 +14,7 @@ def create_chessboard():
     print(chessboard)
 
 def create_random_matrix_from_file():
-    with open("source/input_1.txt", 'r') as f:
+    with open("input.txt", 'r') as f:
         line = f.readline()
     rows, cols = map(int, line.split())
     matrix = RandomMatrix(rows, cols)

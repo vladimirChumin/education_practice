@@ -110,7 +110,7 @@ class Matrix:
         self.data = result.data
 
     def write_to_file(self, filename):
-        with open(f"results/{filename}.txt", 'w') as f:
+        with open(f"{filename}.txt", 'w') as f:
             for i in range(self.rows):
                 row_data = ";".join(self.data[i].astype(str))
                 f.write(row_data + "\n")
