@@ -1,6 +1,5 @@
 import numpy as np
-import random as rd
-from base_classes.Matrix import Matrix, RandomMatrix, DiagonalMatrix
+from Matrix import Matrix, RandomMatrix, DiagonalMatrix
 
 def find_max_in_np():
     line = input("Enter a line of numbers separated by spaces: \n")
@@ -14,7 +13,7 @@ def create_diagonal_matrix():
     print(f"Diagonal Matrix of size {size}:\n{chessboard}")
 
 def create_random_matrix_from_file():
-    with open("source/input_1.txt", 'r') as f:
+    with open("input_1.txt", 'r') as f:
         line = f.readline()
     rows, cols = map(int, line.split())
     matrix = RandomMatrix(rows, cols)
@@ -61,7 +60,7 @@ def fourth_calculation():
 def main():
     find_max_in_np()
     create_diagonal_matrix()
-    process_and_multiply_matrices()
+    process_and_add_matrices()
     # Uncomment the following lines to run the calculations
     # first_calculation()
     # second_calculation()
