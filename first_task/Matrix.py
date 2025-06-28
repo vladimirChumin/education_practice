@@ -91,29 +91,11 @@ class Matrix:
             raise ValueError("Matrices must have the same dimensions to copy")
         self.data = np.copy(other.data)
 
-    def find_max_values(self, is_row=True):
-        if is_row:
-            return np.max(self.data, axis=1)
-        else:
-            return np.max(self.data, axis=0)
-
     def find_min_values(self, is_row=True):
         if is_row:
             return np.min(self.data, axis=1)
         else:
             return np.min(self.data, axis=0)
-
-    def divide_by_list(self, lst, is_row=True):
-        if len(lst) != (self.rows if is_row else self.cols):
-            raise ValueError("Length of list must match the number of rows or columns")
-        result = Matrix(self.rows, self.cols)
-        for i in range(self.rows):
-            for j in range(self.cols):
-                if is_row:
-                    result[i, j] = self[i, j] / lst[i]
-                else:
-                    result[i, j] = self[i, j] / lst[j]
-        self.data = result.data
 
     def substract_from_list(self, lst, is_row=True):
         if len(lst) != (self.rows if is_row else self.cols):
@@ -128,17 +110,10 @@ class Matrix:
         self.data = result.data
 
     def write_to_file(self, filename):
-        with open(f"results/{filename}.txt", 'w') as f:
+        with open(f"{filename}.txt", 'w') as f:
             for i in range(self.rows):
                 row_data = ";".join(self.data[i].astype(str))
                 f.write(row_data + "\n")
-
-class Chessboard(Matrix):
-    def __init__(self, size):
-        super().__init__(size, size)
-        for i in range(size):
-            for j in range(size):
-                self[i, j] = (i + j) % 2
 
 class RandomMatrix(Matrix):
     def __init__(self, rows, cols, is_int = True):
@@ -153,7 +128,3 @@ class DiagonalMatrix(Matrix):
         for i in range(size):
             self[i, i] = 1
             self[i, size - 1 - i] = 1
-
-if __name__ == "__main__":
-    r = RandomMatrix(3, 3)
-    r.write_to_file("random_matrix")
