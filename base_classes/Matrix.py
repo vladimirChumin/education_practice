@@ -97,12 +97,6 @@ class Matrix:
         else:
             return np.max(self.data, axis=0)
 
-    def find_min_values(self, is_row=True):
-        if is_row:
-            return np.min(self.data, axis=1)
-        else:
-            return np.min(self.data, axis=0)
-
     def divide_by_list(self, lst, is_row=True):
         if len(lst) != (self.rows if is_row else self.cols):
             raise ValueError("Length of list must match the number of rows or columns")
@@ -113,18 +107,6 @@ class Matrix:
                     result[i, j] = self[i, j] / lst[i]
                 else:
                     result[i, j] = self[i, j] / lst[j]
-        self.data = result.data
-
-    def substract_from_list(self, lst, is_row=True):
-        if len(lst) != (self.rows if is_row else self.cols):
-            raise ValueError("Length of list must match the number of rows or columns")
-        result = Matrix(self.rows, self.cols)
-        for i in range(self.rows):
-            for j in range(self.cols):
-                if is_row:
-                    result[i, j] = self[i, j] - lst[i]
-                else:
-                    result[i, j] = self[i, j] - lst[j]
         self.data = result.data
 
     def write_to_file(self, filename):
@@ -147,13 +129,3 @@ class RandomMatrix(Matrix):
             for j in range(cols):
                 self[i, j] = rd.randint(0, 100) if is_int else rd.uniform(0, 100)
 
-class DiagonalMatrix(Matrix):
-    def __init__(self, size, fill=0):
-        super().__init__(size, size, fill=fill)
-        for i in range(size):
-            self[i, i] = 1
-            self[i, size - 1 - i] = 1
-
-if __name__ == "__main__":
-    r = RandomMatrix(3, 3)
-    r.write_to_file("random_matrix")
