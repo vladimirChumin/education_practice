@@ -36,36 +36,54 @@ def process_and_add_matrices():
 def first_calculation():
     data_A = np.array([[2, 4], [6, 2]])
     data_B = np.array([[2, -2], [3, 2]])
-    A = Matrix(data_A.shape[0], data_A.shape[1], matrix=data_A)
-    B = Matrix(data_B.shape[0], data_B.shape[1], matrix=data_B)
+    A = Matrix(matrix=data_A)
+    B = Matrix(matrix=data_B)
+    A_1 = (A * 2)  * B
+    A_2 = (B * 2) * A
+    C = A_1 - A_2
+    return C
 
 def second_calculation():
     data_A = np.array([[2, 4], [7, 2]])
     data_B = np.array([[-6, -2], [3, 3]])
-    A = Matrix(data_A.shape[0], data_A.shape[1], matrix=data_A)
-    B = Matrix(data_B.shape[0], data_B.shape[1], matrix=data_B)
+    A = Matrix(matrix=data_A)
+    B = Matrix(matrix=data_B)
+    A_1 = A.transpose() * B.transpose()
+    A_2 = A.transpose() * 2
+    C = A_1 - A_2
+    return C
+
 
 def third_calculation():
     data_A = np.array([[5, 5, 3], [-1, 2, 1], [2, -1, 3]])
     data_B = np.array([[-2, 4, 1], [5, 1, 6], [0, 1, -2]])
-    A = Matrix(data_A.shape[0], data_A.shape[1], matrix=data_A)
-    B = Matrix(data_B.shape[0], data_B.shape[1], matrix=data_B)
+    A = Matrix(matrix=data_A)
+    B = Matrix(matrix=data_B)
+    A_1 = A * 3
+    A_2 = B * 2
+    C = A_1 - A_2
+    return C
 
 def fourth_calculation():
     data_A = np.array([[1, 0, 2], [0, 2, 1], [2, 0, 1]])
     data_B = np.array([[0, 1, 0], [3, 1, 4], [0, 0, 2]])
-    A = Matrix(data_A.shape[0], data_A.shape[1], matrix=data_A)
-    B = Matrix(data_B.shape[0], data_B.shape[1], matrix=data_B)
+    A = Matrix(matrix=data_A)
+    B = Matrix(matrix=data_B)
+    A_1 = A ** 2
+    A_2 = A.transpose() * (B ** 2)
+    C = A_1 + A_2
+    return C
+
 
 def main():
-    find_max_in_np()
-    create_diagonal_matrix()
-    process_and_add_matrices()
+    # find_max_in_np()
+    # create_diagonal_matrix()
+    # process_and_add_matrices()
     # Uncomment the following lines to run the calculations
-    # first_calculation()
-    # second_calculation()
-    # third_calculation()
-    # fourth_calculation()
+    first_calculation()
+    second_calculation()
+    third_calculation()
+    fourth_calculation()
 
 
 if __name__ == "__main__":
