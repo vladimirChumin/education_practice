@@ -2,15 +2,16 @@ import numpy as np
 import random as rd
 
 class Matrix:
-    def __init__(self, rows, cols, fill=0, matrix=None):
-        self.rows = rows
-        self.cols = cols
-        self.data = np.zeros((rows, cols), dtype=float) + fill
+    def __init__(self, rows=0, cols=0, fill=0, matrix=None):
         if matrix is not None:
             if isinstance(matrix, np.ndarray):
-                if matrix.shape != (rows, cols):
-                    raise ValueError("Provided matrix dimensions do not match")
                 self.data = np.copy(matrix)
+                self.cols = matrix.shape[1]
+                self.rows = matrix.shape[0]
+        else:
+            self.rows = rows
+            self.cols = cols
+            self.data = np.full((rows, cols), fill, dtype=float)
 
     def __getitem__(self, index):
         return self.data[index]
@@ -82,7 +83,9 @@ class Matrix:
         result = Matrix(self.rows, self.cols).__identity_matrix__()
         for _ in range(pow):
             result = result * self
-        return result
+
+    def transpone_matrix(self):
+        return Matrix(matrix=self.data.T)
 
     def copy_matrix(self, other):
         if not isinstance(other, Matrix):
