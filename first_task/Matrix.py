@@ -13,17 +13,16 @@ class Matrix:
             self.cols = cols
             self.data = np.full((rows, cols), fill, dtype=float)
 
-    def __getitem__(self, index):
-        return self.data[index]
+    def __getitem__(self, key):
+        i, j = key
+        return self.data[i, j]
 
-    def __setitem__(self, index, value):
-        self.data[index] = value
+    def __setitem__(self, key, value):
+        i, j = key
+        self.data[i, j] = value
 
     def __str__(self):
-        return str(self.data)
-
-    def __repr__(self):
-        return f"Matrix({self.rows}, {self.cols})"
+        return "\n".join(["; ".join(map(str, row)) for row in self.data])
 
     def __identity_matrix__(self):
         if self.rows != self.cols:
@@ -83,6 +82,7 @@ class Matrix:
         result = Matrix(self.rows, self.cols).__identity_matrix__()
         for _ in range(pow):
             result = result * self
+        return result
 
     def transpone_matrix(self):
         return Matrix(matrix=self.data.T)
