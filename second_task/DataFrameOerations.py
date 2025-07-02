@@ -1,6 +1,5 @@
-import numpy as np
+from matplotlib import pyplot as plt
 import pandas as pd
-from numpy.ma.core import get_data
 
 
 class DataFrameOperations:
