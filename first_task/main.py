@@ -1,6 +1,6 @@
+# python
 import numpy as np
 import random as rd
-from first_task.Matrix import Matrix, Chessboard, RandomMatrix
 
 def read_np():
     line = input("Введите числа разделенные пробелом: \n")
@@ -8,71 +8,82 @@ def read_np():
     print("NP массив: ", np_array)
 
 def create_chessboard():
-    size = int(input(": Введите размер шахматной доски \n"))
-    chessboard = Chessboard(size)
+    size = int(input("Введите размер шахматной доски \n"))
+    # Формируем шахматную доску с элементами (i+j)%2
+    chessboard = np.fromfunction(lambda i, j: (i + j) % 2, (size, size), dtype=int)
     print(chessboard)
 
 def create_random_matrix_from_file():
     with open("input.txt", 'r') as f:
         line = f.readline()
     rows, cols = map(int, line.split())
-    matrix = RandomMatrix(rows, cols)
+    # Генерируем матрицу случайных целых чисел от 0 до 100
+    matrix = np.random.randint(0, 101, size=(rows, cols))
     return matrix
 
 def process_and_multiply_matrices():
     A = create_random_matrix_from_file()
-    B = RandomMatrix(len(A.data[0]), rd.randint(1, 10))
+    B = np.random.randint(0, 101, size=(A.shape[1], rd.randint(1, 10)))
     print(f"Матрица A:\n{A}")
     print(f"Матрица B:\n{B}")
 
-    max_val = A.find_max_values(is_row=True)
+    # Находим максимальные значения по строкам
+    max_val = np.max(A, axis=1)
     print(f"Максимальные значения матрицы: {max_val}")
-    A.divide_by_list(max_val, is_row=True)
-    print(f"Матрица а после вычитания максимальных элементов:\n{A}")
-    C = A * B
+    # Делим каждую строку на её максимальное значение
+    A = A / max_val[:, None]
+    print(f"Матрица A после нормализации строк:\n{A}")
+    # Умножение матриц (dot product)
+    C = np.dot(A, B)
     print(f"A * B:\n{C}")
-    C.write_to_file("first_task/result_matrix")
+    write_matrix_to_file(C, "first_task/result_matrix")
 
 def first_calculation():
     data_A = np.array([[2, 3], [4, 7]])
     data_B = np.array([[5, 1], [2, 3]])
-    print(f"Матрица A:\n{data_A}\n Матрица B:\n{data_B}")
-    A = Matrix(matrix=data_A)
-    B = Matrix(matrix=data_B)
-    A_1 = A.transpone_matrix() * B
-    A_2 = A * B.transpone_matrix()
-    C = A_1 * A_2
+    print(f"Матрица A:\n{data_A}\nМатрица B:\n{data_B}")
+    # A_transposed * B
+    A_1 = np.dot(data_A.T, data_B)
+    # A * B_transposed
+    A_2 = np.dot(data_A, data_B.T)
+    # Результат вычисления A^T * B * A * B^T
+    C = np.dot(A_1, A_2)
     print("Результат вычисления A^T * B * A * B^T\n", C)
 
 def second_calculation():
     data_A = np.array([[2, 3], [1, 2]])
     data_B = np.array([[1, -2], [3, 1]])
-    A = Matrix(data_A.shape[0], data_A.shape[1], matrix=data_A)
-    B = Matrix(data_B.shape[0], data_B.shape[1], matrix=data_B)
-    A_1 = A.transpone_matrix() - B
-    A_2 = B.transpone_matrix() * 2
+    # A_transposed - B
+    A_1 = data_A.T - data_B
+    # 2 * B_transposed
+    A_2 = data_B.T * 2
     C = A_1 - A_2
     print("Результат вычисления A^T - B - 2 * B^T:\n", C)
 
 def third_calculation():
     data_A = np.array([[5, 8, 2], [-1, 3, 1], [2, 0, 3]])
     data_B = np.array([[2, 4, 1], [3, -1, 8], [0, 1, 2]])
-    A = Matrix(matrix=data_A)
-    B = Matrix(matrix=data_B)
-    A_1 = A * 3
-    A_2 = B.transpone_matrix() * A.transpone_matrix()
+    # Элементное умножение числа на матрицу
+    A_1 = data_A * 3
+    # В данном случае используем матричное умножение
+    A_2 = np.dot(data_B.T, data_A.T)
     C = A_1 + A_2
     print("Результат вычисления 3 * A + B^T * A^T:\n", C)
 
 def fourth_calculation():
     data_A = np.array([[1, 0, 2], [-1, 2, 1], [2, 0, 1]])
     data_B = np.array([[2, 1, 0], [3, -1, 4], [0, 0, 2]])
-    A = Matrix(matrix=data_A)
-    B = Matrix(matrix=data_B)
-    A_1 = A ** 2
-    A_2 = A.transpone_matrix() * B
+    # Матрица A в степени 2 (матричное умножение)
+    A_1 = np.linalg.matrix_power(data_A, 2)
+    A_2 = np.dot(data_A.T, data_B)
     C = A_1 + A_2
     print("Результат вычисления A^2 + A^T * B:\n", C)
+
+def write_matrix_to_file(matrix, filename):
+    with open(f"{filename}.txt", 'w') as f:
+        for row in matrix:
+            row_data = ";".join(map(str, row))
+            f.write(row_data + "\n")
 
 def all_task():
     read_np()

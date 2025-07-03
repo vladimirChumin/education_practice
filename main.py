@@ -8,7 +8,7 @@ def main():
     match choice:
         case "2":
             print("Задача 2: Работа с матрицами и NumPy")
-            first_main()
+            # first_main()
         case "3":
             print("Задача 3: Работа с DataFrame")
             second_main()
@@ -19,14 +19,14 @@ def main():
             print("Неверный выбор задачи. Пожалуйста, выберите от 2 до 4.")
 
 def all_task():
-    print("Выполнение всех задач:")
-    print("Задача 2: Работа с матрицами и NumPy")
-    first_all_task()
-    print("Задача 3: Работа с DataFrame")
-    second_all_task()
-    print("Задача 4: Визуализация данных с помощью Matplotlib")
+    # print("Выполнение всех задач:")
+    # print("Задача 2: Работа с матрицами и NumPy")
+    # first_all_task()
+    # print("Задача 3: Работа с DataFrame")
+    # second_all_task()
+    # print("Задача 4: Визуализация данных с помощью Matplotlib")
     third_all_task()
-    print("Все задачи выполнены.")
+    # print("Все задачи выполнены.")
 
 if __name__ == "__main__":
     all_task()

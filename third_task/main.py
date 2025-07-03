@@ -1,33 +1,39 @@
-from third_task.DataFrameOerations import DataFrameOperations
+from third_task.data_frame_functions import (
+    load_dataframe,
+    ethnical_diagram,
+    ethnicaly_gender_diagram,
+    exam_score_histogram,
+    gender_parents_education_histogram
+)
 
 def all_task():
-    df = DataFrameOperations("dataset_marks.csv")
-    df.ethnical_diagram(result_score=179)
-    df.ethnicaly_gender_diagram()
-    df.exam_score_histogram(step=5)
-    df.gender_parents_education_histogram()
+    df = load_dataframe("dataset_marks.csv")
+    ethnical_diagram(df, result_score=179)
+    ethnicaly_gender_diagram(df)
+    exam_score_histogram(df, step=5)
+    gender_parents_education_histogram(df)
     print(1)
 
 def main():
     choice = input("Выберите задачу (1-5): \n")
-    cur_df = DataFrameOperations("dataset_marks.csv")
+    df = load_dataframe("dataset_marks.csv")
 
     match choice:
         case "1":
             print("Создание DataFrame")
-            print(cur_df.df)
+            print(df)
         case "2":
             print("Задача 2: Круговая диаграмма соотношения этнической принадлежности и результатов экзаменов")
-            cur_df.ethnical_diagram(result_score=179)
+            ethnical_diagram(df, result_score=179)
         case "3":
             print("Задача 3: Диаграмма зависимости пола и этнической принадлежности")
-            cur_df.ethnicaly_gender_diagram()
+            ethnicaly_gender_diagram(df)
         case "4":
             print("Задача 4: Гистограмма результатов экзаменов")
-            cur_df.exam_score_histogram(step=5)
+            exam_score_histogram(df, step=5)
         case "5":
             print("Задача 5: Гистограмма зависимости пола и образования родителей")
-            cur_df.gender_parents_education_histogram()
+            gender_parents_education_histogram(df)
         case _:
             print("Неверный выбор задачи. Пожалуйста, выберите от 1 до 5.")
 
