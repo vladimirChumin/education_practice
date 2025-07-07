@@ -20,7 +20,7 @@ def main():
 
     match choice:
         case "1":
-            print("Создание DataFrame")
+            print("Задачв 1: Создание DataFrame")
             print(df)
         case "2":
             print("Задача 2: Круговая диаграмма соотношения этнической принадлежности и результатов экзаменов")
@@ -30,13 +30,17 @@ def main():
             ethnicaly_gender_diagram(df)
         case "4":
             print("Задача 4: Гистограмма результатов экзаменов")
-            exam_score_histogram(df, step=5)
+            step = input("Введите шаг для гистограммы (по умолчанию 5): ")
+            if step.isdigit():
+                step = int(step)
+            else:
+                step = 5
+            exam_score_histogram(df, step=step)
         case "5":
             print("Задача 5: Гистограмма зависимости пола и образования родителей")
             gender_parents_education_histogram(df)
         case _:
             print("Неверный выбор задачи. Пожалуйста, выберите от 1 до 5.")
-
 
 if __name__ == "__main__":
     all_task()
