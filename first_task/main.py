@@ -40,13 +40,13 @@ def first_calculation():
     data_B = np.array([[5, 1], [2, 3]])
     A_1 = np.dot(data_A.T, data_B)
     A_2 = np.dot(data_A, data_B.T)
-    C = np.dot(A_1, A_2)
+    C =  A_1 - A_2
     return C
 
 def second_calculation():
     data_A = np.array([[2, 3], [1, 2]])
     data_B = np.array([[1, -2], [3, 1]])
-    A_1 = data_A.T - data_B
+    A_1 = np.dot(data_A.T, data_B)
     A_2 = data_B.T * 2
     C = A_1 - A_2
     return C
@@ -76,7 +76,7 @@ def write_matrix_to_file(matrix, filename):
 def all_task():
     line = input("Введите числа разделенные пробелом: \n")
     line = line.strip()
-    create_np(line)
+    print(create_np(line))
     size = int(input("Введите размер шахматной доски \n"))
     chess_board = create_chessboard(size)
     print(chess_board)
@@ -88,7 +88,7 @@ def all_task():
     C_2 = second_calculation()
     C_3 = third_calculation()
     C_4 = fourth_calculation()
-    print("Результат вычисления A^T * B * A * B^T\n", C_1)
+    print("Результат вычисления A^T * B - A * B^T\n", C_1)
     input("Нажмите Enter для продолжения...")
     print("Результат вычисления A^T - B - 2 * B^T:\n", C_2)
     input("Нажмите Enter для продолжения...")
@@ -119,7 +119,7 @@ def main():
         case "4":
             print("Задача 4: Выполнение математических операций с матрицами")
             C_1 = first_calculation()
-            print("Результат вычисления A^T * B * A * B^T\n", C_1)
+            print("Результат вычисления A^T * B - A * B^T\n", C_1)
             input("Нажмите Enter для продолжения...")
             C_2 = second_calculation()
             print("Результат вычисления A^T - B - 2 * B^T:\n", C_2)
